@@ -27,6 +27,7 @@
 
 #include "Controller/AnalysisController.h"
 #include "Controller/AnalysisControllerEmitterOptions.h"
+#include "ValidateAliasTests.h"
 
 #include <cstdlib>
 #include <filesystem>
@@ -468,6 +469,10 @@ int main(int Argc, const char **Argv) {
                     SoundnessOpt, AutoGlobalsOpt);
   if (!HA.getProjectIRDB().isValid()) {
     // Note: Error message has already been printed
+    return 1;
+  }
+
+  if (!runValidateAliasTests(HA)) {
     return 1;
   }
 
